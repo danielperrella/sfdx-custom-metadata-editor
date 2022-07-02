@@ -2,12 +2,12 @@
 	"name": "sfdx-custom-metadata-editor",
 	"displayName": "SFDX Custom Metadata Editor",
 	"description": "Edit your custom metadata as csv",
-	"qna": "https://github.com/Dan-Per/sfdx-custom-metadata-editor/issues",
+	"qna": "https://github.com/danielperrella/sfdx-custom-metadata-editor/issues",
 	"bugs": {
-		"url": "https://github.com/Dan-Per/sfdx-custom-metadata-editor/issues"
+		"url": "https://github.com/danielperrella/sfdx-custom-metadata-editor/issues"
 	},
 	"repository": {
-		"url": "https://github.com/Dan-Per/sfdx-custom-metadata-editor/"
+		"url": "https://github.com/danielperrella/sfdx-custom-metadata-editor/"
 	},
 	"icon": "images/icon.png",
 	"galleryBanner": {
@@ -16,6 +16,7 @@
 	},
 	"author": "Daniel Perrella",
 	"version": "0.0.1",
+	"publisher": "PerrellaDaniel",
 	"engines": {
 		"vscode": "^1.64.0"
 	},
