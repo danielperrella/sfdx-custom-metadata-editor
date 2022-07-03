@@ -15,7 +15,7 @@
 		"theme": "light"
 	},
 	"author": "Daniel Perrella",
-	"version": "0.0.1",
+	"version": "0.0.3",
 	"publisher": "PerrellaDaniel",
 	"engines": {
 		"vscode": "^1.64.0"
@@ -26,8 +26,7 @@
 	"activationEvents": [
 		"workspaceContains:sfdx-project.json",
 		"onCommand:sfdx-custom-metadata-editor.export",
-		"onCommand:sfdx-custom-metadata-editor.import",
-		"onCommand:sfdx-custom-metadata-editor.test"
+		"onCommand:sfdx-custom-metadata-editor.import"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -44,11 +43,6 @@
 			]
 		},
 		"commands": [
-			{
-				"command": "sfdx-custom-metadata-editor.test",
-				"category": "Category",
-				"title": "Test"
-			},
 			{
 				"command": "sfdx-custom-metadata-editor.export",
 				"title": "Export Custom Metadata To CSV",

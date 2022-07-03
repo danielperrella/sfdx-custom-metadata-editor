@@ -1,9 +1,22 @@
 # Change Log
 
-All notable changes to the "sfdx-custom-metadata-editor" extension will be documented in this file.
-
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
-## [Unreleased]
+## [0.0.1](https://github.com/danielperrella/sfdx-custom-metadata-editor) - 2021-07-02
 
 - Initial release
+
+## [0.0.2](https://github.com/danielperrella/sfdx-custom-metadata-editor) - 2021-07-03
+
+### Changed
+
+- Fix values position
+
+## [0.0.3](https://github.com/danielperrella/sfdx-custom-metadata-editor) - 2021-07-03
+
+### Added
+
+- Changelog
+
+### Changed
+
+- Improve documentation
+- Icon
