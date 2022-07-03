@@ -15,7 +15,7 @@
 		"theme": "light"
 	},
 	"author": "Daniel Perrella",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"publisher": "PerrellaDaniel",
 	"engines": {
 		"vscode": "^1.64.0"

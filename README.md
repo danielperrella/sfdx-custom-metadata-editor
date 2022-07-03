@@ -10,5 +10,7 @@ This extension gives you the possibility to export records of your custom metada
 
 ## Commands
 
-You can use the `Export` function selecting them as `SCME: Export Custom Metadata To CSV`, 
-You can use the `Import` function selecting them as `SCME: Import Custom Metadata From CSV`.
+| Function | Commande Palette                      |
+|----------|---------------------------------------|
+| Export   | SCME: Export Custom Metadata To CSV   |
+| Import   | SCME: Import Custom Metadata From CSV |

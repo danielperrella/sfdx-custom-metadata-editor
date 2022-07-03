@@ -20,3 +20,9 @@
 
 - Improve documentation
 - Icon
+
+## [0.0.4](https://github.com/danielperrella/sfdx-custom-metadata-editor) - 2021-07-03
+
+### Changed
+
+- Readme
