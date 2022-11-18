@@ -26,3 +26,13 @@
 ### Changed
 
 - Readme
+
+## [0.0.5](https://github.com/danielperrella/sfdx-custom-metadata-editor) - 2022-11-18
+
+### Added
+
+- SystemModstamp to ignore list
+
+### Changed
+
+- Query method (now extended to 10000 records)

@@ -3,7 +3,7 @@ import { DescribeSObjectResult } from "jsforce/describe-result";
 import { MyQueryResult, XmlObject, XmlValue } from ".";
 var js2xmlparser = require("js2xmlparser");
 
-const uselessField: string[] = ['Id', 'MasterLabel', 'Language', 'NamespacePrefix', 'QualifiedApiName', 'Label', 'DeveloperName'];
+const uselessField: string[] = ['Id', 'MasterLabel', 'Language', 'NamespacePrefix', 'QualifiedApiName', 'Label', 'DeveloperName', 'SystemModstamp'];
 
 const options: IOptions = {
   format: { doubleQuotes: true },

@@ -13,7 +13,7 @@ export class PluginExtensionUtils {
   private selectedCmdt: string | undefined;
   private selectedFolder: string | undefined;
   private selectedFile: string | undefined;
-  private uselessField: string[] = ['Id', 'MasterLabel', 'Language', 'NamespacePrefix', 'QualifiedApiName'];
+  private uselessField: string[] = ['Id', 'MasterLabel', 'Language', 'NamespacePrefix', 'QualifiedApiName', 'SystemModstamp'];
 
 
   public constructor() {
@@ -87,51 +87,58 @@ export class PluginExtensionUtils {
   }
 
   public async exportCmdt() {
-
-    const describe = await this.connection?.describe(this.selectedCmdt!);
-
-    let fieldToQuery: string[] = [];
-    describe?.fields.forEach(element => {
-      if (!this.uselessField.includes(element.name)) {
-        if (element.type === 'reference') {
-          fieldToQuery.push(element.relationshipName + '.DeveloperName');
-        } else {
-          fieldToQuery.push(element.name);
+    try {
+      const describe = await this.connection?.describe(this.selectedCmdt!);
+      let fieldToQuery: string[] = [];
+      describe?.fields.forEach(element => {
+        if (!this.uselessField.includes(element.name)) {
+          if (element.type === 'reference') {
+            fieldToQuery.push(element.relationshipName + '.DeveloperName');
+          } else {
+            fieldToQuery.push(element.name);
+          }
         }
-      }
-    });
-    const query = `SELECT ${fieldToQuery.join(', ')} FROM ${this.selectedCmdt}`;
-    const queryResult = await this.connection?.query(query);
-    if (queryResult?.done && queryResult.records.length !== 0) {
-      let records: MyQueryResult[] = queryResult.records as unknown as MyQueryResult[];
-      records.forEach(record => {
-        delete record.attributes;
-        Object.keys(record).forEach((key: keyof MyQueryResult) => {
-          const stringkey: string = key as string;
-          if (stringkey.endsWith('__r')) {
-            const newkey = stringkey.slice(0, -1) + 'c';
-            const devName = record[key].DeveloperName;
-            delete record[key];
-            record[newkey] = devName;
-          }
-          else if (record[key] === null) {
-            record[key] = '';
-          }
-        });
       });
-      const csvValue = toCsv(records);
-      makeFileSync(`${this.selectedFolder}\\${this.selectedCmdt}.csv`, csvValue);
+      const query = `SELECT ${fieldToQuery.join(', ')} FROM ${this.selectedCmdt}`;
+      console.log('exportCmdt - query:',query);
+      const queryResult = await this.connection?.autoFetchQuery(query);
+      if (queryResult?.done && queryResult.records.length !== 0) {
+        let records: MyQueryResult[] = queryResult.records as unknown as MyQueryResult[];
+        records.forEach(record => {
+          delete record.attributes;
+          Object.keys(record).forEach((key: keyof MyQueryResult) => {
+            const stringkey: string = key as string;
+            if (stringkey.endsWith('__r')) {
+              const newkey = stringkey.slice(0, -1) + 'c';
+              const devName = record[key].DeveloperName;
+              delete record[key];
+              record[newkey] = devName;
+            }
+            else if (record[key] === null) {
+              record[key] = '';
+            }
+          });
+        });
+        const csvValue = toCsv(records);
+        makeFileSync(`${this.selectedFolder}\\${this.selectedCmdt}.csv`, csvValue);
+      }
+    } catch (error) {
+      throw new Error(JSON.stringify(error));
     }
   }
 
   public async importCmdt() {
-    let json: MyQueryResult[] = await toJson(this.selectedFile!) as MyQueryResult[];
-    const describe = await this.connection?.describe(this.selectedCmdt!);
-
-    json.forEach(element => {
-      const xml = generateXml(element, describe!);
-      makeFileSync(`${this.projectPath}\\force-app\\main\\default\\customMetadata\\${this.selectedCmdt?.slice(0, -5)}.${element.DeveloperName}.md-meta.xml`, xml);
-    });
+    try {
+      let json: MyQueryResult[] = await toJson(this.selectedFile!) as MyQueryResult[];
+      const describe = await this.connection?.describe(this.selectedCmdt!);
+  
+      json.forEach(element => {
+        const xml = generateXml(element, describe!);
+        makeFileSync(`${this.projectPath}\\force-app\\main\\default\\customMetadata\\${this.selectedCmdt?.slice(0, -5)}.${element.DeveloperName}.md-meta.xml`, xml);
+      });
+    } catch (error) {
+      throw new Error(JSON.stringify(error));
+    }
   }
 
   // https://github.com/forcedotcom/cli/issues/1425
