@@ -36,3 +36,13 @@
 ### Changed
 
 - Query method (now extended to 10000 records)
+
+## [0.0.6](https://github.com/danielperrella/sfdx-custom-metadata-editor) - 2022-11-22
+
+### Added
+
+- Added update function for list of custom metadata
+
+### Changed
+
+- Fixed bug on type of reference fields

@@ -10,7 +10,14 @@ This extension gives you the possibility to export records of your custom metada
 
 ## Commands
 
-| Function | Commande Palette                      |
-|----------|---------------------------------------|
-| Export   | SCME: Export Custom Metadata To CSV   |
-| Import   | SCME: Import Custom Metadata From CSV |
+| Function | Commande Palette                          |
+| -------- | ----------------------------------------- |
+| Export   | SCME: Export Custom Metadata To CSV       |
+| Import   | SCME: Import Custom Metadata From CSV     |
+| Refresh  | SCME: Refresh Custom Metadata Definitions |
+
+## How to use it
+
+It is advisable to first extract the custom metadata csv via the export function and work on the generated file.
+So that you can use the import function that will create the .md-meta.xml files in the CustomMetadata folder of your Salesforce project.
+Files that via the standard deployment functionality you can deploy to your environment.

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { IOptions } from "js2xmlparser";
 import { DescribeSObjectResult } from "jsforce/describe-result";
 import { MyQueryResult, XmlObject, XmlValue } from ".";
@@ -15,7 +16,7 @@ export function generateXml(csvJsonValue: MyQueryResult, describeSobject: Descri
   // console.log('xml: ',xml);
   describeSobject.fields.forEach(element => {
     if (!uselessField.includes(element.name)) {
-      xml.values.push(new XmlValue(element.name, element.soapType, csvJsonValue[element.name]));
+      xml.values.push(new XmlValue(element.name, element.soapType === "tns:ID" ? "xsd:string" : element.soapType, csvJsonValue[element.name]));
     }
   });
   return js2xmlparser.parse("CustomMetadata", fromXmlObjectToObj(xml), options);

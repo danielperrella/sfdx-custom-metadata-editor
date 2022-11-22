@@ -15,7 +15,7 @@
     "theme": "light"
   },
   "author": "Daniel Perrella",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "publisher": "PerrellaDaniel",
   "engines": {
     "vscode": "^1.64.0"
@@ -26,7 +26,8 @@
   "activationEvents": [
     "workspaceContains:sfdx-project.json",
     "onCommand:sfdx-custom-metadata-editor.export",
-    "onCommand:sfdx-custom-metadata-editor.import"
+    "onCommand:sfdx-custom-metadata-editor.import",
+    "onCommand:sfdx-custom-metadata-editor.refresh"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -51,6 +52,11 @@
       {
         "command": "sfdx-custom-metadata-editor.import",
         "title": "Import Custom Metadata From CSV",
+        "category": "SCME"
+      },
+      {
+        "command": "sfdx-custom-metadata-editor.refresh",
+        "title": "Refresh Custom Metadata Definitions",
         "category": "SCME"
       }
     ]

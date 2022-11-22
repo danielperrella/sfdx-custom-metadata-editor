@@ -100,8 +100,8 @@ export class PluginExtensionUtils {
         }
       });
       const query = `SELECT ${fieldToQuery.join(', ')} FROM ${this.selectedCmdt}`;
-      console.log('exportCmdt - query:',query);
-      const queryResult = await this.connection?.autoFetchQuery(query);
+      console.log('exportCmdt - query:', query);
+      let queryResult = await this.connection?.autoFetchQuery(query);
       if (queryResult?.done && queryResult.records.length !== 0) {
         let records: MyQueryResult[] = queryResult.records as unknown as MyQueryResult[];
         records.forEach(record => {
@@ -121,6 +121,8 @@ export class PluginExtensionUtils {
         });
         const csvValue = toCsv(records);
         makeFileSync(`${this.selectedFolder}\\${this.selectedCmdt}.csv`, csvValue);
+      } else {
+        console.error(JSON.stringify(queryResult));
       }
     } catch (error) {
       throw new Error(JSON.stringify(error));
@@ -131,7 +133,7 @@ export class PluginExtensionUtils {
     try {
       let json: MyQueryResult[] = await toJson(this.selectedFile!) as MyQueryResult[];
       const describe = await this.connection?.describe(this.selectedCmdt!);
-  
+
       json.forEach(element => {
         const xml = generateXml(element, describe!);
         makeFileSync(`${this.projectPath}\\force-app\\main\\default\\customMetadata\\${this.selectedCmdt?.slice(0, -5)}.${element.DeveloperName}.md-meta.xml`, xml);

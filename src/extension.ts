@@ -7,7 +7,7 @@ export async function activate(context: vscode.ExtensionContext) {
     console.log('Custom Metadata Editor Activated');
 
     // ---- Initialization START ---- //
-    const utils = new PluginExtensionUtils();
+    let utils = new PluginExtensionUtils();
     await utils.initializeConnection();
     await utils.populateCustomMetadataList();
     // ---- Initialization END ---- //
@@ -44,6 +44,22 @@ export async function activate(context: vscode.ExtensionContext) {
       })
     );
     // ---- Export END ---- //
+
+    // ---- Refresh START ---- //
+    context.subscriptions.push(
+      vscode.commands.registerCommand('sfdx-custom-metadata-editor.refresh', async () => {
+        vscode.window.withProgress({
+          cancellable: true,
+          location: vscode.ProgressLocation.Notification,
+          title: 'Refreshing Custom Metadata Definitions...',
+        }, async () => {
+          utils = new PluginExtensionUtils();
+          await utils.initializeConnection();
+          await utils.populateCustomMetadataList();
+        });
+      })
+    );
+    // ---- Refresh END ---- //
 
   } catch (error) {
     console.log('Custom Metadata Editor ERROR: ', error);
